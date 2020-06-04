@@ -77,18 +77,18 @@ void ofApp::draw() {
   
   ofPushMatrix();
     shader.begin();
-  
+
     shader.setUniform1f("time", ofGetElapsedTimef() / 8 );
     shader.setUniform2f("mousePos", vec2(ofGetMouseX(), ofGetHeight() - ofGetMouseY()));
     shader.setUniform2f("u_resolution", ofGetWidth(), ofGetHeight());
     shader.setUniformTexture("imageText", imageText.getTexture(), 1);
     //shader.setUniformTexture("fboTexture", fbo.getTexture(), 0);
   //  ofDrawRectangle(0,0, ofGetWidth(), ofGetHeight());
-    
-    
-    //TO-DO: Make a dynamic mesh from the springs, this means I will then be able to apply a texture to it
+        
+    //TO-DO: Apply texture to patches Mesh
     for( int i = 0; i < patches.size(); i++ ) {
         patches[i]->getMesh().draw(); //drawWireframe
+        patches[i]->getMesh().getTexCoords(); //get texcoords
     }
     
   shader.end();

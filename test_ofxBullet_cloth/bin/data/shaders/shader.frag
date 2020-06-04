@@ -11,16 +11,13 @@ uniform sampler2D imageText;
 
 in vec2 texCoordVarying;
 
-//from https://gist.github.com/companje/29408948f1e8be54dd5733a74ca49bb9
-float map(float value, float min1, float max1, float min2, float max2) {
-  return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
-}
-
 void main(){
-  vec2 pixelPos = gl_FragCoord.xy/u_resolution;
+  vec2 pixelPos = texCoordVarying/u_resolution;
   pixelPos.y = 1.0 - pixelPos.y;
   
-  vec4 image = texture(imageText, pixelPos);
+  vec4 image = texture(imageText, texCoordVarying);
+  
+//  vec3 src = texture(imageText, texCoordVarying).rgb;
   
   fragColor = image;
 }
@@ -50,4 +47,8 @@ void main(){
   
   fragColor = col;
 }
+ //from https://gist.github.com/companje/29408948f1e8be54dd5733a74ca49bb9
+ float map(float value, float min1, float max1, float min2, float max2) {
+   return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
+ }
 */
